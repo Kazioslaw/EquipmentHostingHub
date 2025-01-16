@@ -10,109 +10,109 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EquipmentHostingHub.Data.Migrations
 {
-    [DbContext(typeof(EquipementHostingHubContext))]
-    [Migration("20250115130903_InitialCreate")]
-    partial class InitialCreate
-    {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
-        {
+	[DbContext(typeof(EquipmentHostingHubContext))]
+	[Migration("20250115130903_InitialCreate")]
+	partial class InitialCreate
+	{
+		/// <inheritdoc />
+		protected override void BuildTargetModel(ModelBuilder modelBuilder)
+		{
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.12")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+			modelBuilder
+				.HasAnnotation("ProductVersion", "8.0.12")
+				.HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+			SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("EquipmentHostingHub.Models.EquipementContract", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+			modelBuilder.Entity("EquipmentHostingHub.Models.EquipmentContract", b =>
+				{
+					b.Property<int>("ID")
+						.ValueGeneratedOnAdd()
+						.HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+					SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+					b.Property<string>("Name")
+						.IsRequired()
+						.HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProcessEquipementID")
-                        .HasColumnType("int");
+					b.Property<int>("ProcessEquipmentID")
+						.HasColumnType("int");
 
-                    b.Property<int>("ProductionFacilityID")
-                        .HasColumnType("int");
+					b.Property<int>("ProductionFacilityID")
+						.HasColumnType("int");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+					b.Property<int>("Quantity")
+						.HasColumnType("int");
 
-                    b.HasKey("ID");
+					b.HasKey("ID");
 
-                    b.HasIndex("ProcessEquipementID");
+					b.HasIndex("ProcessEquipmentID");
 
-                    b.HasIndex("ProductionFacilityID");
+					b.HasIndex("ProductionFacilityID");
 
-                    b.ToTable("EquipementContracts");
-                });
+					b.ToTable("EquipmentContracts");
+				});
 
-            modelBuilder.Entity("EquipmentHostingHub.Models.ProcessEquipement", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+			modelBuilder.Entity("EquipmentHostingHub.Models.ProcessEquipment", b =>
+				{
+					b.Property<int>("ID")
+						.ValueGeneratedOnAdd()
+						.HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+					SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<decimal>("Area")
-                        .HasColumnType("decimal(18,2)");
+					b.Property<decimal>("Area")
+						.HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+					b.Property<string>("Name")
+						.IsRequired()
+						.HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+					b.HasKey("ID");
 
-                    b.ToTable("ProcessEquipements");
-                });
+					b.ToTable("ProcessEquipments");
+				});
 
-            modelBuilder.Entity("EquipmentHostingHub.Models.ProductionFacility", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+			modelBuilder.Entity("EquipmentHostingHub.Models.ProductionFacility", b =>
+				{
+					b.Property<int>("ID")
+						.ValueGeneratedOnAdd()
+						.HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+					SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<decimal>("Area")
-                        .HasColumnType("decimal(18,2)");
+					b.Property<decimal>("Area")
+						.HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+					b.Property<string>("Name")
+						.IsRequired()
+						.HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+					b.HasKey("ID");
 
-                    b.ToTable("ProductionFacilities");
-                });
+					b.ToTable("ProductionFacilities");
+				});
 
-            modelBuilder.Entity("EquipmentHostingHub.Models.EquipementContract", b =>
-                {
-                    b.HasOne("EquipmentHostingHub.Models.ProcessEquipement", "ProcessEquipement")
-                        .WithMany()
-                        .HasForeignKey("ProcessEquipementID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+			modelBuilder.Entity("EquipmentHostingHub.Models.EquipmentContract", b =>
+				{
+					b.HasOne("EquipmentHostingHub.Models.ProcessEquipment", "ProcessEquipment")
+						.WithMany()
+						.HasForeignKey("ProcessEquipmentID")
+						.OnDelete(DeleteBehavior.Cascade)
+						.IsRequired();
 
-                    b.HasOne("EquipmentHostingHub.Models.ProductionFacility", "ProductionFacility")
-                        .WithMany()
-                        .HasForeignKey("ProductionFacilityID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+					b.HasOne("EquipmentHostingHub.Models.ProductionFacility", "ProductionFacility")
+						.WithMany()
+						.HasForeignKey("ProductionFacilityID")
+						.OnDelete(DeleteBehavior.Cascade)
+						.IsRequired();
 
-                    b.Navigation("ProcessEquipement");
+					b.Navigation("ProcessEquipment");
 
-                    b.Navigation("ProductionFacility");
-                });
+					b.Navigation("ProductionFacility");
+				});
 #pragma warning restore 612, 618
-        }
-    }
+		}
+	}
 }
