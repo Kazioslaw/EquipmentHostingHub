@@ -2,7 +2,7 @@
 
 namespace EquipmentHostingHub.Models
 {
-	public class ProcessEquipement
+	public class ProcessEquipment
 	{
 		[Key]
 		public int ID { get; set; }
